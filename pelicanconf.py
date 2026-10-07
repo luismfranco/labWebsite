@@ -26,9 +26,9 @@ I18N_SUBSITES = {
     'es': {
         'SITENAME': 'Franco Lab',
         'SOCIAL': [
-            ("Linkedin", '/es/pages/underConstruction.html'),
-            ("Bluesky", '/es/pages/underConstruction.html'),
-            ("Facebook", '/es/pages/underConstruction.html'),
+            ("Linkedin", 'es/pages/underConstruction.html'),
+            ("Bluesky", 'es/pages/underConstruction.html'),
+            ("Facebook", 'es/pages/underConstruction.html'),
         ]
     }
 }
@@ -46,20 +46,20 @@ DISPLAY_CATEGORIES_ON_MENU = False
 
 MENUITEMS = {
     'en': (
-        ('Research', '/pages/research.html'),
-        ('Team', '/pages/team.html'),
-        ('Publications', '/pages/publications.html'),
-        ('News', '/pages/news.html'),
-        ('Join', '/pages/join.html'),
-        ('Contact', '/pages/contact.html'),
+        ('Research', 'pages/research.html'),
+        ('Team', 'pages/team.html'),
+        ('Publications', 'pages/publications.html'),
+        ('News', 'pages/news.html'),
+        ('Join', 'pages/join.html'),
+        ('Contact', 'pages/contact.html'),
     ),
     'es': (
-        ('Investigación', '/pages/research.html'),
-        ('Equipo', '/pages/team.html'),
-        ('Publicaciones', '/pages/publications.html'),
-        ('Noticias', '/pages/news.html'),
-        ('Únete', '/pages/join.html'),
-        ('Contacto', '/pages/contact.html'),
+        ('Investigación', 'pages/research.html'),
+        ('Equipo', 'pages/team.html'),
+        ('Publicaciones', 'pages/publications.html'),
+        ('Noticias', 'pages/news.html'),
+        ('Únete', 'pages/join.html'),
+        ('Contacto', 'pages/contact.html'),
     ),
 }
 
@@ -71,9 +71,9 @@ LINKS = [
 
 # Social widget
 SOCIAL = [
-    ("Linkedin", '/pages/underConstruction.html'),
-    ("Bluesky", '/pages/underConstruction.html'),
-    ("Facebook", '/pages/underConstruction.html'),
+    ("Linkedin", 'pages/underConstruction.html'),
+    ("Bluesky", 'pages/underConstruction.html'),
+    ("Facebook", 'pages/underConstruction.html'),
 ]
 
 # Added by Luis on 261002
