@@ -23,18 +23,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          submodules: 'recursive' # Automatically pulls down themes/plugins if they are submodules
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install Pelican and Plugins
+      - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pelican[markdown]
-          pip install pelican-i18n-subsites jinja2-time
-          # If you have specific plugin dependencies, add them here (e.g., pip install pelican-i18n)
+          pip install pelican[markdown] pelican-i18n-subsites jinja2-time
 
       - name: Build Pelican Site
         run: |
