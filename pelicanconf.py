@@ -1,6 +1,6 @@
 AUTHOR = 'Luis M. Franco'
 SITENAME = 'Franco Lab'
-SITEURL = 'http://127.0.0.1:8000' #'https://github.io'
+SITEURL = 'https://github.io' # 'http://127.0.0.1:8000' #
 PATH = 'content'
 RELATIVE_URLS = False 
 TIMEZONE = 'US/Pacific'
