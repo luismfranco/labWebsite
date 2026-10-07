@@ -1,8 +1,8 @@
 AUTHOR = 'Luis M. Franco'
 SITENAME = 'Franco Lab'
-SITEURL = 'https://luismfranco.github.io/labWebsite'
+SITEURL = 'https://github.io'
 PATH = 'content'
-RELATIVE_URLS = True
+RELATIVE_URLS = False
 TIMEZONE = 'US/Pacific'
 DEFAULT_LANG = 'en'
 INDEX_SAVE_AS = 'blog.html'
@@ -26,9 +26,9 @@ I18N_SUBSITES = {
     'es': {
         'SITENAME': 'Franco Lab',
         'SOCIAL': [
-            ("Linkedin", 'es/pages/underConstruction.html'),
-            ("Bluesky", 'es/pages/underConstruction.html'),
-            ("Facebook", 'es/pages/underConstruction.html'),
+            ("Linkedin", '/labWebsite/es/pages/underConstruction.html'),
+            ("Bluesky", '/labWebsite/es/pages/underConstruction.html'),
+            ("Facebook", '/labWebsite/es/pages/underConstruction.html'),
         ]
     }
 }
@@ -46,20 +46,20 @@ DISPLAY_CATEGORIES_ON_MENU = False
 
 MENUITEMS = {
     'en': (
-        ('Research', 'pages/research.html'),
-        ('Team', 'pages/team.html'),
-        ('Publications', 'pages/publications.html'),
-        ('News', 'pages/news.html'),
-        ('Join', 'pages/join.html'),
-        ('Contact', 'pages/contact.html'),
+        ('Research', '/labWebsite/pages/research.html'),
+        ('Team', '/labWebsite/pages/team.html'),
+        ('Publications', '/labWebsite/pages/publications.html'),
+        ('News', '/labWebsite/pages/news.html'),
+        ('Join', '/labWebsite/pages/join.html'),
+        ('Contact', '/labWebsite/pages/contact.html'),
     ),
     'es': (
-        ('Investigación', 'pages/research.html'),
-        ('Equipo', 'pages/team.html'),
-        ('Publicaciones', 'pages/publications.html'),
-        ('Noticias', 'pages/news.html'),
-        ('Únete', 'pages/join.html'),
-        ('Contacto', 'pages/contact.html'),
+        ('Investigación', '/labWebsite/es/pages/research.html'),
+        ('Equipo', '/labWebsite/es/pages/team.html'),
+        ('Publicaciones', '/labWebsite/es/pages/publications.html'),
+        ('Noticias', '/labWebsite/es/pages/news.html'),
+        ('Únete', '/labWebsite/es/pages/join.html'),
+        ('Contacto', '/labWebsite/es/pages/contact.html'),
     ),
 }
 
@@ -71,9 +71,9 @@ LINKS = [
 
 # Social widget
 SOCIAL = [
-    ("Linkedin", 'pages/underConstruction.html'),
-    ("Bluesky", 'pages/underConstruction.html'),
-    ("Facebook", 'pages/underConstruction.html'),
+    ("Linkedin", '/labWebsite/pages/underConstruction.html'),
+    ("Bluesky", '/labWebsite/pages/underConstruction.html'),
+    ("Facebook", '/labWebsite/pages/underConstruction.html'),
 ]
 
 # Added by Luis on 261002
