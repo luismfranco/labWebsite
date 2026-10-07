@@ -1,6 +1,9 @@
 AUTHOR = 'Luis M. Franco'
 SITENAME = 'Franco Lab'
-SITEURL = 'https://luismfranco.github.io/labWebsite/' # 'http://127.0.0.1:8000' #
+SITEURL = 'http://127.0.0.1:8000/'
+import os
+if os.environ.get('GITHUB_ACTIONS') == 'true':
+    SITEURL = 'https://luismfranco.github.io/labWebsite/'
 PATH = 'content'
 RELATIVE_URLS = False 
 TIMEZONE = 'US/Pacific'
