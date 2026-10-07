@@ -1,13 +1,22 @@
 AUTHOR = 'Luis M. Franco'
 SITENAME = 'Franco Lab'
-SITEURL = 'https://github.io'
+SITEURL = 'https://luismfranco.github.io/labWebsite'
 PATH = 'content'
+RELATIVE_URLS = False
 TIMEZONE = 'US/Pacific'
 DEFAULT_LANG = 'en'
 INDEX_SAVE_AS = 'blog.html'
 
+# Repository path in page links
+PAGE_URL = 'pages/{slug}.html'
+PAGE_SAVE_AS = 'pages/{slug}.html'
+
+# Language pages
+LANG_PAGE_URL = '{lang}/pages/{slug}.html'
+LANG_PAGE_SAVE_AS = '{lang}/pages/{slug}.html'
+
+# Theme
 THEME = 'themes/notmyidea'
-RELATIVE_URLS = False
 THEME_STATIC_DIR = 'theme'
 
 # Translation
@@ -418,15 +427,5 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 """
-
-
-
-
-
-
-
-
-
-
 
 DEFAULT_PAGINATION = 10
