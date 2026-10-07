@@ -1,13 +1,13 @@
 AUTHOR = 'Luis M. Franco'
 SITENAME = 'Franco Lab'
-SITEURL = ''
+SITEURL = 'https://github.io'
 PATH = 'content'
 TIMEZONE = 'US/Pacific'
 DEFAULT_LANG = 'en'
 INDEX_SAVE_AS = 'blog.html'
 
 THEME = 'themes/notmyidea'
-RELATIVE_URLS = True
+RELATIVE_URLS = False
 THEME_STATIC_DIR = 'theme'
 
 # Translation
