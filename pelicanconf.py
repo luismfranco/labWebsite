@@ -29,9 +29,9 @@ I18N_SUBSITES = {
     'es': {
         'SITENAME': 'Franco Lab',
         'SOCIAL': [
-            ("Linkedin", '/es/pages/underConstruction.html'),
-            ("Bluesky", '/es/pages/underConstruction.html'),
-            ("Facebook", '/es/pages/underConstruction.html'),
+            ("Linkedin", SITEURL + '/es/pages/underConstruction.html'),
+            ("Bluesky", SITEURL + '/es/pages/underConstruction.html'),
+            ("Facebook", SITEURL + '/es/pages/underConstruction.html'),
         ]
     }
 }
@@ -74,9 +74,9 @@ LINKS = [
 
 # Social widget
 SOCIAL = [
-    ("Linkedin", '/pages/underConstruction.html'),
-    ("Bluesky", '/pages/underConstruction.html'),
-    ("Facebook", '/pages/underConstruction.html'),
+    ("Linkedin", SITEURL + '/pages/underConstruction.html'),
+    ("Bluesky", SITEURL + '/pages/underConstruction.html'),
+    ("Facebook", SITEURL + '/pages/underConstruction.html'),
 ]
 
 # Added by Luis on 261002
