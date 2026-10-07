@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="{% block html_lang %}{{ DEFAULT_LANG }}{% endblock html_lang %}">
+        <head>
+                {% block head %}
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>{% block title %}{{ SITENAME|striptags }}{%endblock%}</title>
+                        <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/main.css" />
+                        {% if FEED_ALL_ATOM %}
+                                <link href="{{ FEED_DOMAIN }}/{% if FEED_ALL_ATOM_URL %}{{ FEED_ALL_ATOM_URL }}{% else %}{{ FEED_ALL_ATOM }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME|striptags }} Atom Feed" />
+                        {% endif %}
+                        {% if FEED_ALL_RSS %}
+                                <link href="{{ FEED_DOMAIN }}/{% if FEED_ALL_RSS_URL %}{{ FEED_ALL_RSS_URL }}{% else %}{{ FEED_ALL_RSS }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME|striptags }} RSS Feed" />
+                        {% endif %}
+                        {% block extra_head %}{% endblock extra_head %}
+                {% endblock head %}
+        </head>
+
+        <body id="index" class="home">
+                {% include 'github.html' %}
+                <header id="banner" class="body">
+
+                        <!-- Language switcher added by Luis on 260922 -->
+                        <div class="lang-switcher" style="position: absolute; top: 15px; right: 20px; display: flex; gap: 12px; z-index: 9999;">
+                        {% if lang_siteurls %}
+                        {% for lang_code, sub_url in lang_siteurls.items() %}
+                                {% set ns = namespace(url="") %}
+                                
+                                {# Explicitly detect home pages for both EN (index) and ES (page object) #}
+                                {% set is_en_home = (not page and not article) %}
+                                {% set is_es_home = (page and (page.slug == 'home' or 'home.html' in page.url)) %}
+                                
+                                {% if is_en_home or is_es_home %}
+
+                                    {# Force exact clean home URLs when on any home page #}
+
+                                    {% if lang_code|lower == 'en' %}
+                                        {% set ns.url = lang_siteurls.get('en', main_siteurl) ~ '/' %}
+                                    {% elif lang_code|lower == 'es' %}
+                                        {% set ns.url = sub_url ~ '/pages/home.html' %}
+                                    {% endif %}
+
+                                {% else %}
+
+                                    {# --- Working logic for all other tabs --- #}
+                                        
+                                    {# 1. Check if the current article matches this language #}
+                                    {% if article and article.lang|lower == lang_code|lower %}
+                                        {% set ns.url = SITEURL ~ '/' ~ article.url %}
+                                    
+                                    {# 2. Check if the current page matches this language #}
+                                    {% elif page and page.lang|lower == lang_code|lower %}
+                                        {% set ns.url = SITEURL ~ '/' ~ page.url %}
+                                    {% endif %}
+                                        
+                                    {# 3. Check article translations #}
+                                    {% if not ns.url and article and article.translations %}
+                                        {% for t in article.translations %}
+                                            {% if t.lang|lower == lang_code|lower %}
+                                                {% set ns.url = SITEURL ~ '/' ~ t.url %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                        
+                                    {# 4. Check page translations #}
+                                    {% if not ns.url and page and page.translations %}
+                                        {% for t in page.translations %}
+                                            {% if t.lang|lower == lang_code|lower %}
+                                                {% set ns.url = SITEURL ~ '/' ~ t.url %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                        
+                                    {# 5. Fallback #}
+                                    {% if not ns.url %}
+                                        {% if lang_code|lower == 'en' %}
+                                            {% set ns.url = lang_siteurls.get('en', main_siteurl) ~ '/' %}
+                                        {% elif lang_code|lower == 'es' %}
+                                            {% set ns.url = sub_url ~ '/pages/home.html' %}
+                                        {% else %}
+                                            {% set ns.url = sub_url ~ '/' %}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+
+                                <a href="{{ ns.url }}" title="{{ lang_code | upper }}" style="text-decoration: none;">
+                                    {% if lang_code|lower == 'es' %}
+                                        <img src="https://flagcdn.com/w40/mx.png" srcset="https://flagcdn.com/w80/mx.png 2x" width="40" alt="Mexico" style="border-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.2);">
+                                    {% elif lang_code|lower == 'en' %}
+                                        <img src="https://flagcdn.com/w40/us.png" srcset="https://flagcdn.com/w80/us.png 2x" width="40" alt="United States" style="border-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.2);">
+                                    {% endif %}
+                                </a>
+                        {% endfor %}
+                        {% endif %}
+                        </div>
+                        <!-- End of language switcher -->
+                
+                        <!-- Changed by Luis on 260922 -->
+                        {% set ns = namespace(home_url="") %}
+
+                        {# If on the Spanish subsite, look for the 'home' page URL #}
+                        {% if DEFAULT_LANG == 'es' %}
+                            {% for pg in pages %}
+                                {% if pg.slug == 'home' and pg.lang == 'es' %}
+                                    {% set ns.home_url = SITEURL ~ '/' ~ pg.url %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                        {# Fallback to standard subsite root for English or if the page isn't found #}
+                        {% if not ns.home_url %}
+                            {% if lang_siteurls and DEFAULT_LANG in lang_siteurls %}
+                                {% set ns.home_url = lang_siteurls[DEFAULT_LANG] ~ '/' %}
+                            {% else %}
+                                {% set ns.home_url = SITEURL ~ '/' %}
+                            {% endif %}
+                        {% endif %}
+
+                        <h1>
+                            <a href="{{ ns.home_url }}">
+                                {{ SITENAME }}{% if SITESUBTITLE %} <strong>{{ SITESUBTITLE }}</strong>{% endif %}
+                            </a>
+                        </h1>
+                        <!-- End of changes by Luis -->
+
+                        <!-- Changed by Luis on 260922 -->
+                        <nav><ul>
+                                {% set current_menu = MENUITEMS.get(DEFAULT_LANG, MENUITEMS.get('en', MENUITEMS)) %}
+                                {% for title, link in current_menu %}
+                                        <li><a href="{{ lang_siteurls[DEFAULT_LANG] }}/{{ link[1:] if link.startswith('/') else link }}">{{ title }}</a></li>
+                                {% endfor %}
+
+                                {% if DISPLAY_PAGES_ON_MENU -%}
+                                        {% for pg in pages %}
+                                                {# Find the translation matching the current language if available #}
+                                                {% set target_pg = pg %}
+                                                {% if pg.lang != DEFAULT_LANG and pg.translations %}
+                                                        {% for t in pg.translations %}
+                                                                {% if t.lang == DEFAULT_LANG %}
+                                                                        {% set target_pg = t %}
+                                                                {% endif %}
+                                                        {% endfor %}
+                                                {% endif %}
+                                                
+                                                <li{% if target_pg == page %} class="active"{% endif %}>
+                                                        <a href="{{ SITEURL }}/{{ target_pg.url }}">{{ target_pg.title }}</a>
+                                                </li>
+                                        {% endfor %}
+                                {% endif %}
+                                
+                                {% if DISPLAY_CATEGORIES_ON_MENU -%}
+                                        {% for cat, null in categories %}
+                                                <li{% if cat == category %} class="active"{% endif %}>
+                                                        <a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a>
+                                                </li>
+                                        {% endfor %}
+                                {% endif %}
+                        </ul></nav>
+                        <!-- End of changes by Luis -->
+
+                </header><!-- /#banner -->
+                {% block content %}
+                {% endblock %}
+                <section id="extras" class="body">
+                        {% if LINKS %}
+                                <div class="blogroll">
+                                        <h2>{{ LINKS_WIDGET_NAME | default('links') }}</h2>
+                                        <ul>
+                                                {% for name, link in LINKS %}
+                                                        <li><a href="{{ link }}">{{ name }}</a></li>
+                                                {% endfor %}
+                                        </ul>
+                                </div><!-- /.blogroll -->
+                        {% endif %}
+                        {% if SOCIAL or FEED_ALL_ATOM or FEED_ALL_RSS %}
+                                <div class="social">
+                                        <h2>{{ SOCIAL_WIDGET_NAME | default('social') }}</h2>
+                                        <ul>
+                                                {% if FEED_ALL_ATOM %}
+                                                        <li><a href="{{ FEED_DOMAIN }}/{% if FEED_ALL_ATOM_URL %}{{ FEED_ALL_ATOM_URL }}{% else %}{{ FEED_ALL_ATOM }}{% endif %}" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                                                {% endif %}
+                                                {% if FEED_ALL_RSS %}
+                                                        <li><a href="{{ FEED_DOMAIN }}/{% if FEED_ALL_RSS_URL %}{{ FEED_ALL_RSS_URL }}{% else %}{{ FEED_ALL_RSS }}{% endif %}" type="application/rss+xml" rel="alternate">rss feed</a></li>
+                                                {% endif %}
+                                                {% for name, link in SOCIAL %}
+                                                        <li><a href="{{ link }}">{{ name }}</a></li>
+                                                {% endfor %}
+                                        </ul>
+                                </div><!-- /.social -->
+                        {% endif %}
+                </section><!-- /#extras -->
+
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
+
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
+
+                {% include 'analytics.html' %}
+                {% include 'disqus_script.html' %}
+        </body>
+</html>

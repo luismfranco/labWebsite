@@ -1,0 +1,12 @@
+<!-- Changed by Luis on 260922 -->
+{% macro translations_for(article) %}
+  {# Intentionally left blank to hide the text on the page #}
+{% endmacro %}
+
+{% macro entry_hreflang(entry) %}
+  {% if entry.translations %}
+    {% for translation in entry.translations %}
+      <link rel="alternate" hreflang="{{ translation.lang }}" href="{{ SITEURL }}/{{ translation.url }}">
+    {% endfor %}
+  {% endif %}
+{% endmacro %}
