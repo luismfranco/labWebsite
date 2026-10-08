@@ -493,12 +493,14 @@ li:first-child .hentry, #content > .hentry {border: 0; margin: 0;}
 #add-comment input[type='submit'] {float: right; margin: 0 .5em;}
 #add-comment * {margin-bottom: .5em;}
 
-/* hover-container added by Luis on 260916 */
+
+
+/* Hover container. Added by Luis on 260916 */
 .hover-container {
     position: relative;
     display: inline-block;
     width: 100%;
-    max-width: 200px; /* Adjust as needed */
+    max-width: 200px;                                  /* Adjust as needed */
 }
 .hover-container img {
     display: block;
@@ -511,7 +513,7 @@ li:first-child .hentry, #content > .hentry {border: 0; margin: 0;}
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7); /* Black overlay with opacity */
+    background: rgba(0, 0, 0, 0.7);                   /* Black overlay with opacity */
     color: #ffffff;
     display: flex;
     align-items: center;
@@ -526,7 +528,7 @@ li:first-child .hentry, #content > .hentry {border: 0; margin: 0;}
     opacity: 1;
 }
 
-/* Language flags added by Luis on 260919*/
+/* Language flags. Added by Luis on 260919*/
 .lang-switcher {
     position: absolute;
     top: 15px;
@@ -539,8 +541,8 @@ li:first-child .hentry, #content > .hentry {border: 0; margin: 0;}
 
 .lang-flag img {
     display: block;
-    border-radius: 3px; /* Slightly rounds corners of the square flags */
-    box-shadow: 0 1px 3px rgba(0,0,0,0.15); /* Adds a subtle shadow border */
+    border-radius: 3px;                                 /* Slightly rounds corners of the square flags */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);           /* Adds a subtle shadow border */
     transition: transform 0.2s ease, filter 0.2s ease;
 }
 
@@ -549,24 +551,23 @@ li:first-child .hentry, #content > .hentry {border: 0; margin: 0;}
     filter: brightness(1.05);
 }
 
-
-/* Image display for mobile phones. Adde by Luis on 261002*/
+/* Image display for mobile phones. Added by Luis on 261002*/
 @media screen and (max-width: 768px) {
     
     /* Text shrinking to the right/left of floated images. */
     img, .wp-caption, figure {
         max-width: 100% !important;
         height: auto !important;
-        float: none !important;        /* Forcibly strips side-by-side float behavior */
-        display: block !important;     /* Pushes text cleanly above/below the image */
-        margin: 10px auto !important;  /* Centers the image on mobile screens */
+        float: none !important;                        /* Strips side-by-side float behavior */
+        display: block !important;                     /* Pushes text cleanly above/below the image */
+        margin: 10px auto !important;                  /* Centers the image on mobile screens */
     }
     
     /* Images side-by-side that are overflowing or cutting off. */
-    /* This targets common layout rows/containers that host multiple elements */
+    /* Targets common layout rows/containers that host multiple elements */
     .row, .gallery, .image-group, p:has(img) {
         display: flex !important;
-        flex-direction: column !important; /* Stacks horizontal rows vertically */
+        flex-direction: column !important;             /* Stacks horizontal rows vertically */
         align-items: center !important;
         width: 100% !important;
     }
@@ -577,4 +578,3 @@ li:first-child .hentry, #content > .hentry {border: 0; margin: 0;}
         margin: 10px auto !important;
     }
 }
-

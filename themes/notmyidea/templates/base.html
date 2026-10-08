@@ -21,40 +21,34 @@
                 {% include 'github.html' %}
                 <header id="banner" class="body">
 
-                        <!-- Language switcher added by Luis on 260922 -->
+                        <!-- Language switcher. Added by Luis on 260922 -->
                         <div class="lang-switcher" style="position: absolute; top: 15px; right: 20px; display: flex; gap: 12px; z-index: 9999;">
+                        
                         {% if lang_siteurls %}
                         {% for lang_code, sub_url in lang_siteurls.items() %}
-                                {% set ns = namespace(url="") %}
                                 
-                                {# Explicitly detect home pages for both EN (index) and ES (page object) #}
+                                {% set ns = namespace(url="") %}
+                                {# Detects home pages for both EN (index) and ES (page object) #}
                                 {% set is_en_home = (not page and not article) %}
                                 {% set is_es_home = (page and (page.slug == 'home' or 'home.html' in page.url)) %}
                                 
+                                {# Forces exact clean home URLs when on any home page #}
                                 {% if is_en_home or is_es_home %}
-
-                                    {# Force exact clean home URLs when on any home page #}
-
                                     {% if lang_code|lower == 'en' %}
                                         {% set ns.url = lang_siteurls.get('en', main_siteurl) ~ '/' %}
                                     {% elif lang_code|lower == 'es' %}
                                         {% set ns.url = sub_url ~ '/pages/home.html' %}
                                     {% endif %}
-
+                                {# Working logic for all other tabs #}
                                 {% else %}
-
-                                    {# --- Working logic for all other tabs --- #}
-                                        
-                                    {# 1. Check if the current article matches this language #}
+                                    {# Checks if the current article matches this language #}
                                     {% if article and article.lang|lower == lang_code|lower %}
                                         {% set ns.url = SITEURL ~ '/' ~ article.url %}
-                                    
-                                    {# 2. Check if the current page matches this language #}
+                                    {# Checks if the current page matches this language #}
                                     {% elif page and page.lang|lower == lang_code|lower %}
                                         {% set ns.url = SITEURL ~ '/' ~ page.url %}
                                     {% endif %}
-                                        
-                                    {# 3. Check article translations #}
+                                    {# Checks article translations #}
                                     {% if not ns.url and article and article.translations %}
                                         {% for t in article.translations %}
                                             {% if t.lang|lower == lang_code|lower %}
@@ -62,8 +56,7 @@
                                             {% endif %}
                                         {% endfor %}
                                     {% endif %}
-                                        
-                                    {# 4. Check page translations #}
+                                    {# Checks page translations #}
                                     {% if not ns.url and page and page.translations %}
                                         {% for t in page.translations %}
                                             {% if t.lang|lower == lang_code|lower %}
@@ -71,8 +64,7 @@
                                             {% endif %}
                                         {% endfor %}
                                     {% endif %}
-                                        
-                                    {# 5. Fallback #}
+                                    {# Fallback #}
                                     {% if not ns.url %}
                                         {% if lang_code|lower == 'en' %}
                                             {% set ns.url = lang_siteurls.get('en', main_siteurl) ~ '/' %}
@@ -91,6 +83,7 @@
                                         <img src="https://flagcdn.com/w40/us.png" srcset="https://flagcdn.com/w80/us.png 2x" width="40" alt="United States" style="border-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.2);">
                                     {% endif %}
                                 </a>
+
                         {% endfor %}
                         {% endif %}
                         </div>
@@ -98,7 +91,6 @@
                 
                         <!-- Changed by Luis on 260922 -->
                         {% set ns = namespace(home_url="") %}
-
                         {# If on the Spanish subsite, look for the 'home' page URL #}
                         {% if DEFAULT_LANG == 'es' %}
                             {% for pg in pages %}
@@ -107,7 +99,6 @@
                                 {% endif %}
                             {% endfor %}
                         {% endif %}
-
                         {# Fallback to standard subsite root for English or if the page isn't found #}
                         {% if not ns.home_url %}
                             {% if lang_siteurls and DEFAULT_LANG in lang_siteurls %}
@@ -116,7 +107,6 @@
                                 {% set ns.home_url = SITEURL ~ '/' %}
                             {% endif %}
                         {% endif %}
-
                         <h1>
                             <a href="{{ ns.home_url }}">
                                 {{ SITENAME }}{% if SITESUBTITLE %} <strong>{{ SITESUBTITLE }}</strong>{% endif %}
@@ -130,7 +120,6 @@
                                 {% for title, link in current_menu %}
                                         <li><a href="{{ lang_siteurls[DEFAULT_LANG] }}/{{ link[1:] if link.startswith('/') else link }}">{{ title }}</a></li>
                                 {% endfor %}
-
                                 {% if DISPLAY_PAGES_ON_MENU -%}
                                         {% for pg in pages %}
                                                 {# Find the translation matching the current language if available #}
@@ -142,13 +131,11 @@
                                                                 {% endif %}
                                                         {% endfor %}
                                                 {% endif %}
-                                                
                                                 <li{% if target_pg == page %} class="active"{% endif %}>
                                                         <a href="{{ SITEURL }}/{{ target_pg.url }}">{{ target_pg.title }}</a>
                                                 </li>
                                         {% endfor %}
                                 {% endif %}
-                                
                                 {% if DISPLAY_CATEGORIES_ON_MENU -%}
                                         {% for cat, null in categories %}
                                                 <li{% if cat == category %} class="active"{% endif %}>
